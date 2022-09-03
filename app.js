@@ -10,6 +10,7 @@ function addTask() {
     // return if task is empty
     if (task.value === "") {
         alert("Add a task");
-        return false;
+        return false; 
     }
-}
+} 
+
