@@ -9,7 +9,6 @@ function addTask() {
     const list = document.querySelector("ul");
     // return if task is empty
     if (task.value === "") {
-        alert("Add a task");
         return false; 
     }
 } 
