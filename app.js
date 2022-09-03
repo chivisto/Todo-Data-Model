@@ -13,4 +13,3 @@ function addTask() {
         return false; 
     }
 } 
-
