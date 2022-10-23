@@ -1,14 +1,21 @@
-// On form submit add task
-document.querySelector("form").addEventListener("submit", e => {
-    e.preventDefault();
-    addTask();
-});
-
-function addTask() {
-    const task = document.querySelector("form input");
-    const list = document.querySelector("ul");
-    // return if task is empty
-    if (task.value === "") {
-        return false; 
+/****** This is a model todo app for assignment 2 ******/
+let todos = [
+    {
+        todoName: 'Go to the gym',
+        ID: 0,
+        done: true,
+        hide: false
+    },
+    {
+        todoName: 'Study for math test',
+        ID: 1,
+        done: false,
+        hide: false
+    },
+    {
+        todoName: 'Play Overwatch 2 ',
+        ID: 2,
+        done: true,
+        hide: false
     }
-} 
+];
