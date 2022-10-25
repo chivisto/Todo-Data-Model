@@ -26,6 +26,12 @@ let createTodo = document.querySelector('.createTodo');
 
 let userInput = document.querySelector('.userInput');
 
+let clear = document.querySelector('.clearTodo');
+
+let leftTodo = document.querySelector('.pending');
+
+
+
 //User input event listener with a click on button
 createTodo.addEventListener('click', event => {
     if (userInput.value == '') return;
@@ -33,4 +39,21 @@ createTodo.addEventListener('click', event => {
 
     leftTodo.innerHTML = getPendingTasks();
     loadTodos();
+})
+
+todoList.addEventListener('click', event => {
+    if (!event.target.dataset.todoid) {
+        event.path.forEach(tag => {
+            if (tag.localName == 'li') {
+                deleteTodo(tag.dataset.todoid);
+            };
+        })
+    }
+    else {
+        completeTodo(event.target.dataset.todoid);
+    }
+})
+
+clear.addEventListener('click', event => {
+    clearDone();
 })
