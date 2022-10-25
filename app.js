@@ -56,7 +56,7 @@ const addTodo = name => {
     leftTodo.innerHTML = getPendingTasks();
     loadTodos();
 }
-
+//complete todo
 todoList.addEventListener('click', event => {
     if (!event.target.dataset.todoid) {
         event.path.forEach(tag => {
