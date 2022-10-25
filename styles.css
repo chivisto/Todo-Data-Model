@@ -100,3 +100,25 @@ select {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
+.todoList li:hover span {
+  right: 0;
+}
+
+.footer {
+  display: flex;
+  color: white;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.pending {
+  color: #F77354;
+  border-bottom: 1px solid #F77354;
+}
+
+.footer button {
+  font-size: 16px;
+  padding: 6px 10px;
+}
