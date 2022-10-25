@@ -70,10 +70,7 @@ todoList.addEventListener('click', event => {
     }
 })
 
-clear.addEventListener('click', event => {
-    clearDone();
-})
-
+//function to complete todo
 const completeTodo = e => {
     let todoIndex = todos.findIndex(todo => todo.ID == e);
 
@@ -82,3 +79,4 @@ const completeTodo = e => {
     leftTodo.innerHTML = getPendingTasks();
     loadTodos();
 }
+
