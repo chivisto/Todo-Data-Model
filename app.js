@@ -19,3 +19,7 @@ let todos = [
         hide: false
     }
 ];
+
+const todoList = document.querySelector('.todoList');
+
+let userInput = document.querySelector('.userInput');
