@@ -60,3 +60,43 @@ select {
   margin-left: 5px;
   font-size: 22px;
 }
+
+#hide {
+  display: none;
+}
+
+.todoList li {
+  list-style: none;
+  height: 45px;
+  line-height: 45px;
+  position: relative;
+  background: #F77354;
+  margin-bottom: 8px;
+  border-radius: 3px;
+  padding-left: 15px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.done {
+  color: white;
+  text-decoration: line-through;
+}
+
+.fa-trash {
+  color: black;
+  float: right;
+  padding: 0.9375rem;
+}
+
+.todoList li span {
+  position: absolute;
+  right: -45px;
+  width: 45px;
+  color: white;
+  text-align: center;
+  background: white;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
