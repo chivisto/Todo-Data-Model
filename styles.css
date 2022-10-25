@@ -3,4 +3,28 @@
   margin: 0 auto;
 }
 
+button {
+  height: 100%;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  background: #E05893;
+  color: #6A5ACD;
+  cursor: pointer;
+}
 
+.wrapper {
+  margin: 120px auto;
+  max-width: 650px;
+  width: 100%;
+  border-radius: 5px;
+  background: #6A5ACD;
+  padding: 12.5px;
+}
+
+header {
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-weight: 600;
+}
