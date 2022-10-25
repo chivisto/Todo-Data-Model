@@ -19,4 +19,3 @@ let todos = [
         hide: false
     }
 ];
-
