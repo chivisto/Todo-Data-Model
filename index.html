@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App</title>
-    <link rel="stylesheet" href="/styles.css">
-    <script src="/app.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App Isaac Covarrubias</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js"></script>
 </head>
+
 <body>
-    <div class="container">
-        <div class="app">
-          <h1>Todo App</h1>
-          <form>
-            <input type="text" placeholder="Add a task">
-            <button type="submit">&plus;</button>
-          </form>
-          <ul></ul>
-        </div>
-      </div>
+  <div class="container">
+    <header>Todo List App</header>
+    <div class="todoInput">
+      <input class="userInput" type="text" placeholder="What to do today?" />
+      <button class="createTodo"><i class="fas fa-plus"></i></button>
+    </div>
+    <ul class="todoList">
+    </ul>
+    <div class="footer">
+      <span>You have <span class="pending"></span> pending tasks.</span>
+
+      <button class="clearTodo">Clear Done</button>
+    </div>
+  </div>
 </body>
+
 </html>
