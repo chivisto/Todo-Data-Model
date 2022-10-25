@@ -122,3 +122,16 @@ select {
   font-size: 16px;
   padding: 6px 10px;
 }
+
+.wrapper {
+  position: relative;
+  animation-name: example;
+  animation-duration: 2s;  
+  animation-delay: .5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes example {
+  from {top: 200px;}
+  to {top: 0px;}
+}
