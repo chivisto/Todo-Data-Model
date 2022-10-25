@@ -41,19 +41,25 @@ createTodo.addEventListener('click', event => {
     loadTodos();
 })
 
-todoList.addEventListener('click', event => {
-    if (!event.target.dataset.todoid) {
-        event.path.forEach(tag => {
-            if (tag.localName == 'li') {
-                deleteTodo(tag.dataset.todoid);
-            };
-        })
+//create a new todo from user input
+const addTodo = name => {
+    let duplicateName = false;
+    todos.forEach(todo => {
+        if (todo.todoName.toLowerCase() == userInput.value.toLowerCase()) {
+            alert('You already have that to do');
+            duplicateName = true;
+        }
+    })
+    userInput.value = '';
+    if (duplicateName) return;
+    let newTodo = {
+        ID: todos.length,
+        todoName: name,
+        done: false,
+        hide: false
     }
-    else {
-        completeTodo(event.target.dataset.todoid);
-    }
-})
+    todos.push(newTodo);
 
-clear.addEventListener('click', event => {
-    clearDone();
-})
+    leftTodo.innerHTML = getPendingTasks();
+    loadTodos();
+}
