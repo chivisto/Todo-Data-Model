@@ -23,3 +23,4 @@ let todos = [
 const todoList = document.querySelector('.todoList');
 
 let userInput = document.querySelector('.userInput');
+
