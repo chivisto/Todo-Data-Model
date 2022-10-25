@@ -43,15 +43,8 @@ createTodo.addEventListener('click', event => {
 
 //create a new todo from user input
 const addTodo = name => {
-    let duplicateName = false;
-    todos.forEach(todo => {
-        if (todo.todoName.toLowerCase() == userInput.value.toLowerCase()) {
-            alert('You already have that to do');
-            duplicateName = true;
-        }
-    })
     userInput.value = '';
-    if (duplicateName) return;
+
     let newTodo = {
         ID: todos.length,
         todoName: name,
@@ -59,6 +52,32 @@ const addTodo = name => {
         hide: false
     }
     todos.push(newTodo);
+
+    leftTodo.innerHTML = getPendingTasks();
+    loadTodos();
+}
+
+todoList.addEventListener('click', event => {
+    if (!event.target.dataset.todoid) {
+        event.path.forEach(tag => {
+            if (tag.localName == 'li') {
+                deleteTodo(tag.dataset.todoid);
+            };
+        })
+    }
+    else {
+        completeTodo(event.target.dataset.todoid);
+    }
+})
+
+clear.addEventListener('click', event => {
+    clearDone();
+})
+
+const completeTodo = e => {
+    let todoIndex = todos.findIndex(todo => todo.ID == e);
+
+    todos[todoIndex].done = !todos[todoIndex].done;
 
     leftTodo.innerHTML = getPendingTasks();
     loadTodos();
