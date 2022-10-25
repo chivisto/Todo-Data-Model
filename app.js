@@ -22,5 +22,15 @@ let todos = [
 
 const todoList = document.querySelector('.todoList');
 
+let createTodo = document.querySelector('.createTodo');
+
 let userInput = document.querySelector('.userInput');
 
+//User input event listener with a click on button
+createTodo.addEventListener('click', event => {
+    if (userInput.value == '') return;
+    addTodo(userInput.value);
+
+    leftTodo.innerHTML = getPendingTasks();
+    loadTodos();
+})
