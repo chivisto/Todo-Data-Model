@@ -28,3 +28,35 @@ header {
   font-size: 30px;
   font-weight: 600;
 }
+
+.todoInput {
+  display: flex;
+  height: 45px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #F77354;
+  font-size: 17px;
+  border-radius: 3px;
+  padding-left: 15px;
+}
+
+select {
+  width: 40%;
+  height: 100%;
+  border: 1px solid #F77354;
+  font-size: 17px;
+  border-radius: 3px;
+  padding-left: 15px;
+  margin-left: 5px;
+}
+
+.todoInput button {
+  width: 45px;
+  margin-left: 5px;
+  font-size: 22px;
+}
