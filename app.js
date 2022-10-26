@@ -40,6 +40,11 @@ createTodo.addEventListener('click', event => {
     loadTodos();
 })
 
+//clear todo when click on button
+clear.addEventListener('click', event => {
+    clearDone();
+})
+
 //create a new todo from user input
 const addTodo = name => {
     userInput.value = '';
@@ -55,6 +60,7 @@ const addTodo = name => {
     leftTodo.innerHTML = getPendingTasks();
     loadTodos();
 }
+
 //complete todo
 todoList.addEventListener('click', event => {
     if (!event.target.dataset.todoid) {
@@ -78,6 +84,7 @@ const completeTodo = e => {
     leftTodo.innerHTML = getPendingTasks();
     loadTodos();
 }
+
 //delete todos
 const deleteTodo = e => {
     todos.splice(e, 1);
