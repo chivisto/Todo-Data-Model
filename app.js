@@ -1,4 +1,15 @@
 /****** This is a model todo app for assignment 2 ******/
+const todoList = document.querySelector('.todoList');
+
+let createTodo = document.querySelector('.createTodo');
+
+let userInput = document.querySelector('.userInput');
+
+let clear = document.querySelector('.clearTodo');
+
+let leftTodo = document.querySelector('.pending');
+
+//the model used
 let todos = [
     {
         todoName: 'Go to the gym',
@@ -19,18 +30,6 @@ let todos = [
         hide: false
     }
 ];
-
-const todoList = document.querySelector('.todoList');
-
-let createTodo = document.querySelector('.createTodo');
-
-let userInput = document.querySelector('.userInput');
-
-let clear = document.querySelector('.clearTodo');
-
-let leftTodo = document.querySelector('.pending');
-
-
 
 //User input event listener with a click on button
 createTodo.addEventListener('click', event => {
