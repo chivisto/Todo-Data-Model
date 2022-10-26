@@ -95,3 +95,23 @@ const getPendingTasks = () => {
     })
     return count;
 }
+
+//find which ones are done and then clear them
+const clearDone = () => {
+    let i = todos.length
+    while (i--) {
+        if (todos[i].done) {
+            todos.splice(i, 1);
+        }
+    }
+
+    leftTodo.innerHTML = getPendingTasks();
+    loadTodos();
+}
+
+//reassign todo ID if they are deleted or completed
+const reassignIDs = () => {
+    for (let i = 0; i < todos.length; i++) {
+        todos[i].ID = i;
+    }
+}
