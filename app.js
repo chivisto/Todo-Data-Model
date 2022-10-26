@@ -13,19 +13,19 @@ let leftTodo = document.querySelector('.pending');
 let todos = [
     {
         todoName: 'Go to the gym',
-        ID: 0,
+        todoID: 0,
         done: true,
         hide: false
     },
     {
         todoName: 'Study for math test',
-        ID: 1,
+        todoID: 1,
         done: false,
         hide: false
     },
     {
         todoName: 'Play Overwatch 2 ',
-        ID: 2,
+        todoID: 2,
         done: true,
         hide: false
     }
@@ -45,7 +45,7 @@ const addTodo = name => {
     userInput.value = '';
 
     let newTodo = {
-        ID: todos.length,
+        todoID: todos.length,
         todoName: name,
         done: false,
         hide: false
@@ -71,7 +71,7 @@ todoList.addEventListener('click', event => {
 
 //function to complete todo
 const completeTodo = e => {
-    let todoIndex = todos.findIndex(todo => todo.ID == e);
+    let todoIndex = todos.findIndex(todo => todo.todoID == e);
 
     todos[todoIndex].done = !todos[todoIndex].done;
 
@@ -112,7 +112,7 @@ const clearDone = () => {
 //reassign todo ID if they are deleted or completed
 const reassignIDs = () => {
     for (let i = 0; i < todos.length; i++) {
-        todos[i].ID = i;
+        todos[i].todoID = i;
     }
 }
 
@@ -124,7 +124,7 @@ const loadTodos = () => {
         let done = todo.done ? 'done' : '';
         let hide = false;
         let todoElement =
-            `<li id="${hide}" class="${done}" data-ID='${todo.ID} '>${todo.todoName} <i class="fa fa-trash"></i> </li>`;
+            `<li id="${hide}" class="${done}" data-todoID='${todo.todoID} '>${todo.todoName} <i class="fa fa-trash"></i> </li>`;
         todoList.insertAdjacentHTML('beforeend', todoElement);
     })
 }
