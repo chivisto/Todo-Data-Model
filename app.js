@@ -116,5 +116,18 @@ const reassignIDs = () => {
     }
 }
 
+//load the todos in the html and bring it all together 
+const loadTodos = () => {
+    todoList.innerHTML = '';
+
+    todos.forEach(todo => {
+        let done = todo.done ? 'done' : '';
+        let hide = false;
+        let todoElement =
+            `<li id="${hide}" class="${done}" data-ID='${todo.ID} '>${todo.todoName} <i class="fa fa-trash"></i> </li>`;
+        todoList.insertAdjacentHTML('beforeend', todoElement);
+    })
+}
+
 leftTodo.innerHTML = getPendingTasks();
 loadTodos();
