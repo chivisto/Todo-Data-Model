@@ -87,3 +87,12 @@ const deleteTodo = e => {
     leftTodo.innerHTML = getPendingTasks();
     loadTodos();
 }
+
+//get pending todos
+const getPendingTasks = () => {
+    let count = 0;
+    todos.forEach(todo => {
+        if (!todo.done) count++;
+    })
+    return count;
+}
