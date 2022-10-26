@@ -79,4 +79,11 @@ const completeTodo = e => {
     leftTodo.innerHTML = getPendingTasks();
     loadTodos();
 }
+//delete todos
+const deleteTodo = e => {
+    todos.splice(e, 1);
 
+    reassignIDs();
+    leftTodo.innerHTML = getPendingTasks();
+    loadTodos();
+}
