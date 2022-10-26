@@ -115,3 +115,6 @@ const reassignIDs = () => {
         todos[i].ID = i;
     }
 }
+
+leftTodo.innerHTML = getPendingTasks();
+loadTodos();
