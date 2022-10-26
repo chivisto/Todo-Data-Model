@@ -80,8 +80,7 @@ select {
 }
 
 .done {
-  color: white;
-  text-decoration: line-through;
+  text-decoration: white wavy line-through;
 }
 
 .fa-trash {
