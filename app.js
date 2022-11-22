@@ -231,5 +231,37 @@ const handleCategoryFilterChange = (event) => {
     loadTodos(categoryId);
 }
 
+//load the categories filters and display them in HTML
+const loadCategoryFilters = () =>{
+    categoryFilter.innerHTML = "";
+    categoryFilter.insertAdjacentHTML("beforeend", `
+    <div class="categoryFilterContainer">
+        <input 
+            onchange='handleCategoryFilterChange(event)'
+            data-categoryID='0'
+            id='filter-all'
+            name="selectedCategory" 
+            type="radio" 
+            value="0"/>
+        <label for="filter-all">All</label>
+      </div>
+    `);
+
+    categories.forEach(category => {
+        let categoryElement = `
+        <div class="categoryFilterContainer">
+            <input 
+                onchange='handleCategoryFilterChange(event)'
+                data-categoryID='${category.categoryID}'
+                id='filter-${category.categoryID}' 
+                name="selectedCategory" type="radio" 
+                value="${category.categoryID}"/>
+            <label for='filter-${category.categoryID}'>${category.categoryName}</label>
+        </div>
+        `;
+        categoryFilter.insertAdjacentHTML("beforeend", categoryElement);
+    });
+}
+
 leftTodo.innerHTML = getPendingTasks();
 loadTodos();
