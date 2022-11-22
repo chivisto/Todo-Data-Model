@@ -103,6 +103,17 @@ const addCategory = name => {
     loadCategoryFilters();
 }
 
+//load the categories in model to the user
+const loadCategorySelect = () => {
+    categorySelect.innerHTML = "";
+
+    categories.forEach(category => {
+        let categoryElement =
+            `<option value="${category.categoryID}" data-categoryID='${category.categoryID} '>${category.categoryName} </option>`;
+        categorySelect.insertAdjacentHTML('beforeend', categoryElement);
+    })
+}
+
 //complete todo
 todoList.addEventListener('click', event => {
     if (!event.target.dataset.todoid) {
