@@ -178,15 +178,20 @@ const reassignIDs = () => {
 }
 
 //load the todos in the html and bring it all together 
-const loadTodos = () => {
+const loadTodos = (selectedCategory = 0) => {
     todoList.innerHTML = '';
+    console.log(todos)
 
     todos.forEach(todo => {
         let done = todo.done ? 'done' : '';
         let hide = false;
         let todoElement =
             `<li id="${hide}" class="${done}" data-todoID='${todo.todoID} '>${todo.todoName} <i class="fa fa-trash"></i> </li>`;
-        todoList.insertAdjacentHTML('beforeend', todoElement);
+        if(todo.categoryID === selectedCategory) {
+            todoList.insertAdjacentHTML('beforeend', todoElement);
+        } else if(selectedCategory === 0) {
+            todoList.insertAdjacentHTML('beforeend', todoElement);
+        }
     })
 }
 
