@@ -290,3 +290,6 @@ const loadCategories = () => {
 
 leftTodo.innerHTML = getPendingTasks();
 loadTodos();
+loadCategories();
+loadCategorySelect();
+loadCategoryFilters();
