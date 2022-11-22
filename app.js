@@ -1,4 +1,4 @@
-/****** This is a model todo app for assignment 2 ******/
+/****** This is a model todo app with categories for assignment 3 ******/
 const todoList = document.querySelector('.todoList');
 
 let createTodo = document.querySelector('.createTodo');
