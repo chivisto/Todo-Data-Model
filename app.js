@@ -195,5 +195,16 @@ const loadTodos = (selectedCategory = 0) => {
     })
 }
 
+//delete category function
+const deleteCategory = (event) => {
+    const categoryId = event.target.dataset.categoryid;
+    categories = categories.filter(c => +c.categoryID !== +categoryId);
+    loadCategories();
+    loadCategorySelect();
+    loadCategoryFilters();
+}
+
+
+
 leftTodo.innerHTML = getPendingTasks();
 loadTodos();
