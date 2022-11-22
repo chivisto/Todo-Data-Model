@@ -15,17 +15,19 @@ button {
 }
 
 .wrapper {
-  margin: 120px auto;
-  max-width: 650px;
+  /* margin: 120px auto; */
+  max-width: 90%;
   width: 100%;
   border-radius: 5px;
   background: #6A5ACD;
   padding: 12.5px;
+  display: flex;
+  /* justify-content: space-between; */
 }
 
 header {
   text-align: center;
-  color: white;
+  /* color: white; */
   font-size: 30px;
   font-weight: 600;
 }
@@ -60,6 +62,13 @@ select {
   width: 45px;
   margin-left: 5px;
   font-size: 22px;
+}
+
+.categoryInput button {
+  width: 45px;
+  margin-left: 5px;
+  font-size: 22px;
+  height: 35px;
 }
 
 #hide {
@@ -129,6 +138,43 @@ select {
   animation-duration: 2s;  
   animation-delay: .5s;
   animation-fill-mode: forwards;
+}
+
+.category-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 12.5px;
+  color: white;
+}
+
+.categoryInput {
+  display: flex;
+  width: 100%
+}
+
+.categoryList {
+  margin-top: 1rem;
+}
+
+.categoryList li {
+  display: flex;
+  align-items: center;
+}
+
+.categoryFilter {
+  color: white;
+  display: flex;
+  padding: 1rem;
+  font-size: 12px;
+  text-align: center;
+}
+
+.categoryFilterContainer {
+  display: flex;
+}
+
+.categoryFilterContainer label {
+  margin-left: 1rem;
 }
 
 @keyframes example {
