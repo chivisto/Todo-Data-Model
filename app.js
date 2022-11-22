@@ -9,7 +9,19 @@ let clear = document.querySelector('.clearTodo');
 
 let leftTodo = document.querySelector('.pending');
 
-//the model used
+//the model used for Categories 
+let categories = [
+    {
+        categoryID: 1,
+        categoryName: "Games"
+    },
+    {
+        categoryID: 2,
+        categoryName: "School"
+    },
+]
+
+//the model used for Todos
 let todos = [
     {
         todoName: 'Go to the gym',
