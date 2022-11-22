@@ -150,6 +150,7 @@ const deleteTodo = e => {
 //get pending todos
 const getPendingTasks = () => {
     let count = 0;
+
     todos.forEach(todo => {
         if (!todo.done) count++;
     })
