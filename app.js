@@ -90,6 +90,19 @@ const addTodo = (name, categoryID) => {
     loadTodos();
 }
 
+//push category into the model 
+const addCategory = name => {
+    currentCategoryId++;
+    let newCategory = {
+        categoryID: currentCategoryId,
+        categoryName: name
+    }
+    categories.push(newCategory);
+    loadCategories();
+    loadCategorySelect();
+    loadCategoryFilters();
+}
+
 //complete todo
 todoList.addEventListener('click', event => {
     if (!event.target.dataset.todoid) {
