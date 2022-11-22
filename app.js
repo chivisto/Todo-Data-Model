@@ -180,7 +180,6 @@ const reassignIDs = () => {
 //load the todos in the html and bring it all together 
 const loadTodos = (selectedCategory = 0) => {
     todoList.innerHTML = '';
-    console.log(todos)
 
     todos.forEach(todo => {
         let done = todo.done ? 'done' : '';
@@ -199,6 +198,7 @@ const loadTodos = (selectedCategory = 0) => {
 const deleteCategory = (event) => {
     const categoryId = event.target.dataset.categoryid;
     categories = categories.filter(c => +c.categoryID !== +categoryId);
+
     loadCategories();
     loadCategorySelect();
     loadCategoryFilters();
@@ -207,16 +207,28 @@ const deleteCategory = (event) => {
 //edit categories that are there
 const editCategory = (event) => {
     const categoryId = +event.target.dataset.categoryid;
+
     const newName = document.getElementById(`category-${categoryId}`).value;
+
     const categoryIndex = categories.findIndex(c => c.categoryID === categoryId);
+
     const category = categories[categoryIndex];
+
     categories.splice(categoryIndex, 1, {
         ...category,
         categoryName: newName
     })
+
     loadCategories();
     loadCategorySelect();
     loadCategoryFilters();
+}
+
+//change filters when clicked on
+const handleCategoryFilterChange = (event) => {
+    const categoryId = +event.target.dataset.categoryid;
+
+    loadTodos(categoryId);
 }
 
 leftTodo.innerHTML = getPendingTasks();
