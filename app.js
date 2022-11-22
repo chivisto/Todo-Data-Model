@@ -273,5 +273,20 @@ const loadCategoryFilters = () =>{
     });
 }
 
+//load categories after the model ones
+const loadCategories = () => {
+    categoryList.innerHTML = '';
+    categories.forEach(category => {
+        let categoryElement =
+            `<li id="${category.categoryID}" data-categoryID='${category.categoryID}'>
+                ${category.categoryName}
+                <input id='category-${category.categoryID}' placeholder='Edit Category' style='margin-left:1rem;margin-right:1rem'/>
+                <i onclick='editCategory(event)' data-categoryid=${category.categoryID} class="fa fa-edit"></i>
+                <i onclick='deleteCategory(event)' data-categoryid=${category.categoryID} class="fa fa-trash"></i>
+            </li>`;
+        categoryList.insertAdjacentHTML('beforeend', categoryElement);
+    })
+}
+
 leftTodo.innerHTML = getPendingTasks();
 loadTodos();
