@@ -9,6 +9,16 @@ let clear = document.querySelector('.clearTodo');
 
 let leftTodo = document.querySelector('.pending');
 
+let createCategory = document.querySelector(".createCategory");
+
+let categoryName = document.querySelector(".categoryName");
+
+let categoryList = document.querySelector(".categoryList");
+
+let categorySelect = document.querySelector(".categorySelect");
+
+let categoryFilter = document.querySelector(".categoryFilter");
+
 //the model used for Categories 
 let categories = [
     {
