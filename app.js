@@ -55,7 +55,8 @@ let todos = [
 //User input event listener with a click on button
 createTodo.addEventListener('click', event => {
     if (userInput.value == '') return;
-    addTodo(userInput.value);
+
+    addTodo(userInput.value, +categorySelect.value);
 
     leftTodo.innerHTML = getPendingTasks();
     loadTodos();
@@ -74,14 +75,14 @@ createCategory.addEventListener("click", event => {
 })
 
 //create a new todo from user input
-const addTodo = name => {
+const addTodo = (name, categoryID) => {
     userInput.value = '';
-
     let newTodo = {
         todoID: todos.length,
         todoName: name,
         done: false,
-        hide: false
+        hide: false,
+        categoryID
     }
     todos.push(newTodo);
 
