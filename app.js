@@ -25,6 +25,8 @@ let categories = [
     }
 ]
 
+let currentCategoryId = categories.length;
+
 //the model used for Todos
 let todos = [
     {
@@ -62,6 +64,13 @@ createTodo.addEventListener('click', event => {
 //clear todo when click on button
 clear.addEventListener('click', event => {
     clearDone();
+})
+
+//event listener to create the new category 
+createCategory.addEventListener("click", event => {
+    if (categoryName.value === '') return;
+    addCategory(categoryName.value);
+    categoryName.value = "";
 })
 
 //create a new todo from user input
