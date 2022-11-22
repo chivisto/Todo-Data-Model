@@ -204,7 +204,20 @@ const deleteCategory = (event) => {
     loadCategoryFilters();
 }
 
-
+//edit categories that are there
+const editCategory = (event) => {
+    const categoryId = +event.target.dataset.categoryid;
+    const newName = document.getElementById(`category-${categoryId}`).value;
+    const categoryIndex = categories.findIndex(c => c.categoryID === categoryId);
+    const category = categories[categoryIndex];
+    categories.splice(categoryIndex, 1, {
+        ...category,
+        categoryName: newName
+    })
+    loadCategories();
+    loadCategorySelect();
+    loadCategoryFilters();
+}
 
 leftTodo.innerHTML = getPendingTasks();
 loadTodos();
