@@ -1,18 +1,9 @@
 let { categories, currentCategoryId } = require("../db");
 
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
 const getCategories = (req, res) => {
     res.status(200).json(categories);
 }
 
-
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
 const postCategory = (req, res) => {
     const { categoryName } = req.body;
     currentCategoryId++;
@@ -21,15 +12,11 @@ const postCategory = (req, res) => {
     res.status(200).json(newCategory);
 }
 
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
 const putCategory = (req, res) => {
     const { categoryId } = req.params;
     const newData = req.body;
 
-    const selectedCategoryIndex = categories.findIndex((category) => category.categoryID === +categoryId); 
+    const selectedCategoryIndex = categories.findIndex((category) => category.categoryID === +categoryId);
     categories.splice(selectedCategoryIndex, 1, {
         ...categories[selectedCategoryIndex],
         ...newData
@@ -37,18 +24,12 @@ const putCategory = (req, res) => {
     return res.status(200).json(categories[selectedCategoryIndex]);
 }
 
-
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
 const deleteCategory = (req, res) => {
     const { categoryId } = req.params;
-    const selectedCategoryIndex = categories.findIndex((category) => category.categoryID === +categoryId); 
+    const selectedCategoryIndex = categories.findIndex((category) => category.categoryID === +categoryId);
     categories.splice(selectedCategoryIndex, 1);
     return res.status(200).json("deleted");
 }
-
 
 module.exports = {
     getCategories,
