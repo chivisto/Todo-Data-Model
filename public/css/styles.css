@@ -56,6 +56,136 @@ section {
     margin: 2rem;
 }
 
+.how-to{
+    color: white;
+}
+
+#category-create-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+#category-create-form input {
+    width: 100%;
+    margin-right: 5px;
+    border: 1px solid #F77354;
+    border-radius: 5px;
+}
+
+#todo-create-form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.edit-input{
+    margin-left: 5px;
+    height: 12px;
+    margin-top: .4rem;
+    border: 1px solid #F77354;
+    border-radius: 5px;
+}
+
+#todo-create-form input,
+#todo-create-form select {
+    width: 40%;
+    border: 1px solid #F77354;
+    border-radius: 5px;
+}
+
+.actions i {
+    margin-left: 0.4rem;
+    line-height: 45px;
+}
+
+.actions{
+    margin: 0;
+}
+
+.complete-button{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #E05893;
+    color: white;
+}
+
+.complete-decoration{
+    text-decoration: white wavy line-through;
+}
+
+.margin-style-todo{
+    margin-left: 0px;
+    color: black;
+}
+
+.uncomplete-button{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #E05893;
+    color: white;
+}
+
+.completed {
+    text-decoration: none;
+}
+
+.categoryFilter {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    border-bottom: .5px solid black;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    line-height: 45px;
+}
+
+input,
+select {
+    padding: 0.5rem;
+}
+
+button {
+    background: #E05893;
+    color: #6A5ACD;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    height: 100%;
+    font-size: 24px;
+    border-radius: 5px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+h4 {
+    background: #F77354;
+    padding: 0.5rem;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: .5rem;
+}
+
+.fa,
+.fa-solid {
+    cursor: pointer;
+}
+
+.fa-trash{
+    color: black;
+    float: right;
+}
 
 @keyframes example {
     from {top: 200px;}
