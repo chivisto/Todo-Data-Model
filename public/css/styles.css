@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0 auto;
+    font-family: 'Fuzzy Bubbles', cursive;
+}
+
+body {
+    background-color: white;
+    color: white;
+}
+
+h2{
+    text-align: center;
+}
+
+header {
+    text-align: center;
+    /* color: white; */
+    font-size: 30px;
+    font-weight: 600;
+    color: black;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+
+@keyframes example {
+    from {top: 200px;}
+    to {top: 0px;}
+  }
