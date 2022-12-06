@@ -23,6 +23,39 @@ header {
     margin-bottom: 1.5rem;
 }
 
+main {
+    background-color: #6A5ACD;
+    height: auto;
+    width: 70%;
+    margin: auto;
+    justify-content: space-between;
+    position: relative;
+    animation-name: example;
+    animation-duration: 2s;  
+    animation-delay: .5s;
+    animation-fill-mode: forwards;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-container{
+    display: flex;
+    width: 100%;
+    display: flex;
+    height: fit-content;
+    border-radius: 5px;
+    padding: 12.5px;
+}
+
+section {
+    width: 50%;
+    margin: 2rem;
+}
+
 
 @keyframes example {
     from {top: 200px;}
