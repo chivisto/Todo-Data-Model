@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Todo App Isaac Covarrubias</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header>Todo List App</header>
+    <main>
+        <div class="background-container">
+            <section>
+                <h2>Categories</h2>
+                <form id="category-create-form">
+                    <input type="text" id="category-name-input" required placeholder="Name of Category" />
+                    <button><i class="fas fa-plus"></i></button>
+                </form>
+                <div id="categories-container">
+                    <ul id="categories-list">
+                    </ul>
+                </div>
+                <br>
+                <p class="how-to">Type in the todo, then click the edit button to save it</p>
+            </section>
+
+            <section>
+                <h2>Todos</h2>
+                <div id="todos-container">
+                    <div id="todo-create-form">
+                        <input class="todo-name-input" type="text" placeholder="What to do today?" />
+
+                        <select class="categorySelect"></select>
+
+                        <button class="createTodo">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="categoryFilter"></div>
+                    <h4>Incompleted</h4>
+
+                    <ul id="uncompleted-todos-list">
+                    </ul>
+
+                    <h4>Completed</h4>
+
+                    <ul id="completed-todos-list">
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+        <div class="footer background-container">
+            <span><span class="pending"></span> task(s) left to do!</span>
+
+            <button class="clearTodo">Clear Done</button>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
