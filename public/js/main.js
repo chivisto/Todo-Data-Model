@@ -19,3 +19,29 @@ const todoNameInputEl = document.querySelector(".todo-name-input");
 const pendingEl = document.querySelector(".pending");
 
 const clearDoneBtn = document.querySelector(".clearTodo");
+
+let todos = [];
+let categories = [];
+
+//create the category form
+categoryCreateForm.onsubmit = async function (e) {
+    e.preventDefault();
+    let categoryName = categoryNameInput.value;
+    await createCategory(categoryName);
+    categoryCreateForm.reset();
+}
+
+//create the todo button
+createTodoBtn.onclick = async function () {
+    const todoName = todoNameInputEl.value;
+
+    if (todoName.trim() === "") {
+        return;
+    }
+
+    const categoryID = categorySelectEl.value;
+    await createTodo(todoName, +categoryID);
+    loadTodos();
+    todoNameInputEl.value = "";
+}
+
