@@ -250,3 +250,14 @@ async function uncompleteTodo(event) {
     loadTodos();
 }
 
+//reset category filter to default all
+const resetCategoryFilter = () => {
+    const categoryAllRadio = document.getElementById('filter-all');
+    if (categoryAllRadio) {
+        categoryAllRadio.checked = true;
+    }
+}
+
+
+loadTodos();
+loadCategories();
