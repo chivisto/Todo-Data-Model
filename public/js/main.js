@@ -98,3 +98,16 @@ async function deleteTodo(event) {
     }
     loadTodos();
 }
+
+//create todo function 
+async function createTodo(todoName, categoryID) {
+    await fetch("/todos/create", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ todoName, categoryID })
+    });
+    resetCategoryFilter();
+}
