@@ -111,3 +111,29 @@ async function createTodo(todoName, categoryID) {
     });
     resetCategoryFilter();
 }
+
+//load categories that are already premade
+async function loadCategories() {
+    categoriesListEl.innerHTML = "";
+    const response = await fetch("/categories")
+    categories = await response.json();
+    categories.forEach((category) => {
+        let categoryElement = `
+            <li>
+                ${category.categoryName}
+                <input class="edit-input"
+                    type="text"
+                    placeholder="Type to Edit"
+                    id='category-${category.categoryID}'
+                    />
+                    <div class='actions'>
+                        <i onclick='editCategory(event)' data-categoryid=${category.categoryID} class="fa fa-edit"></i>
+                        <i onclick='deleteCategory(event)' data-categoryid=${category.categoryID} class="fa fa-trash"></i>
+                    </div>
+            </li>
+        `;
+        categoriesListEl.insertAdjacentHTML("beforeend", categoryElement);
+    });
+    renderCategoryFilters(categories);
+    renderCategorySelect(categories);
+}
