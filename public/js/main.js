@@ -137,3 +137,34 @@ async function loadCategories() {
     renderCategoryFilters(categories);
     renderCategorySelect(categories);
 }
+
+//have category filters appear on load 
+const renderCategoryFilters = (categories) => {
+    categoryFilterEl.innerHTML = "";
+    categoryFilterEl.insertAdjacentHTML("beforeend", `
+    <div class="categoryFilterContainer">
+        <input 
+            onchange='handleCategoryFilterChange(event)'
+            id='filter-all'
+            name="selectedCategory" 
+            type="radio" 
+            value="0"/>
+        <label for="filter-all">All</label>
+      </div>
+    `);
+    categories.forEach(category => {
+        let categoryElement = `
+        <div class="categoryFilterContainer">
+            <input 
+                onchange='handleCategoryFilterChange(event)'
+                data-categoryID='${category.categoryID}'
+                id='filter-${category.categoryID}' 
+                name="selectedCategory" 
+                type="radio"
+                value="${category.categoryID}"/>
+            <label for='filter-${category.categoryID}'>${category.categoryName}</label>
+        </div>
+        `;
+        categoryFilterEl.insertAdjacentHTML("beforeend", categoryElement);
+    });
+}
