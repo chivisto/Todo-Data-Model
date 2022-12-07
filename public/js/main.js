@@ -178,3 +178,20 @@ const renderCategorySelect = (categories) =>{
         categorySelectEl.insertAdjacentHTML('beforeend', categoryElement);
     })
 }
+
+//create user when submitted
+async function createCategory(categoryName) {
+    const response = await fetch("/categories/create", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            categoryName
+        })
+    })
+    await response.json();
+    loadCategories();
+}
+
