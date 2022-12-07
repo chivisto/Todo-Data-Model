@@ -269,5 +269,20 @@ const getSelectedCategoryInput = () => {
     return null;
 }
 
+//display how many todos are left
+const renderUncompletedTodoCount = () => {
+    const uncompletedTodos = todos.filter(todo => todo.done === false);
+    pendingEl.innerHTML = uncompletedTodos.length;
+}
+
+//change category based on radio button
+const handleCategoryFilterChange = (event) => {
+    const categoryId = +event.target.dataset.categoryid;
+    loadTodos(categoryId);
+}
+
+
+
+
 loadTodos();
 loadCategories();
