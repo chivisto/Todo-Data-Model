@@ -168,3 +168,13 @@ const renderCategoryFilters = (categories) => {
         categoryFilterEl.insertAdjacentHTML("beforeend", categoryElement);
     });
 }
+
+//render select on the category
+const renderCategorySelect = (categories) =>{
+    categorySelectEl.innerHTML = "";
+    categories.forEach(category => {
+        let categoryElement =
+            `<option value="${category.categoryID}" data-categoryID='${category.categoryID} '>${category.categoryName} </option>`;
+        categorySelectEl.insertAdjacentHTML('beforeend', categoryElement);
+    })
+}
