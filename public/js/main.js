@@ -22,12 +22,14 @@ const pendingEl = document.querySelector(".pending");
 const clearDoneBtn = document.querySelector(".clearTodo");
 
 let todos = [];
+
 let categories = [];
 
 //create the category form
 categoryCreateForm.onsubmit = async function (e) {
     e.preventDefault();
     let categoryName = categoryNameInput.value;
+    
     await createCategory(categoryName);
     categoryCreateForm.reset();
 }
@@ -42,6 +44,7 @@ createTodoBtn.onclick = async function () {
 
     const categoryID = categorySelectEl.value;
     await createTodo(todoName, +categoryID);
+    
     loadTodos();
     todoNameInputEl.value = "";
 }
@@ -82,12 +85,14 @@ async function loadTodos(category) {
             completedTodosListEl.insertAdjacentHTML("beforeend", todoElement);
         }
     });
+
     renderUncompletedTodoCount();
 }
 
 //delete todos 
 async function deleteTodo(event) {
     const todoId = event.target.dataset.todoid;
+    
     await fetch(`/todos/delete/${todoId}`, {
         method: "DELETE",
     })
@@ -96,11 +101,13 @@ async function deleteTodo(event) {
     if (categoryAllRadio) {
         categoryAllRadio.checked = true;
     }
+
     loadTodos();
 }
 
 //create todo function 
 async function createTodo(todoName, categoryID) {
+   
     await fetch("/todos/create", {
         method: "POST",
         headers: {
@@ -109,6 +116,7 @@ async function createTodo(todoName, categoryID) {
         },
         body: JSON.stringify({ todoName, categoryID })
     });
+
     resetCategoryFilter();
 }
 
@@ -170,8 +178,9 @@ const renderCategoryFilters = (categories) => {
 }
 
 //render select on the category
-const renderCategorySelect = (categories) =>{
+const renderCategorySelect = (categories) => {
     categorySelectEl.innerHTML = "";
+    
     categories.forEach(category => {
         let categoryElement =
             `<option value="${category.categoryID}" data-categoryID='${category.categoryID} '>${category.categoryName} </option>`;
@@ -202,6 +211,7 @@ async function deleteCategory(event) {
     await fetch(`/categories/delete/${categoryId}`, {
         method: "DELETE",
     });
+
     loadCategories();
 }
 
@@ -232,6 +242,7 @@ async function completeTodo(event) {
 async function uncompleteTodo(event) {
     const selectedCategoryEl = getSelectedCategoryInput();
     const todoId = event.target.dataset.todoid;
+    
     await fetch(`/todos/update/${todoId}`, {
         method: "PUT",
         headers: {
@@ -242,7 +253,9 @@ async function uncompleteTodo(event) {
             done: false
         })
     });
+    
     console.log(selectedCategoryEl)
+    
     if (selectedCategoryEl && selectedCategoryEl.value != "0") {
         loadTodos(selectedCategoryEl.value);
         return;
@@ -253,6 +266,7 @@ async function uncompleteTodo(event) {
 //reset category filter to default all
 const resetCategoryFilter = () => {
     const categoryAllRadio = document.getElementById('filter-all');
+    
     if (categoryAllRadio) {
         categoryAllRadio.checked = true;
     }
@@ -261,11 +275,13 @@ const resetCategoryFilter = () => {
 //select the correct category when clicked on
 const getSelectedCategoryInput = () => {
     const selectedCategoryEls = document.querySelectorAll("input[type='radio'][name='selectedCategory']")
+    
     for (const entry of selectedCategoryEls) {
         if (entry.checked) {
             return entry;
         }
     }
+
     return null;
 }
 
@@ -281,8 +297,29 @@ const handleCategoryFilterChange = (event) => {
     loadTodos(categoryId);
 }
 
+//delete todo when its done 
+async function clearDone() {
+    let selectedCategory = null;
+    const selectedCategoryEl = getSelectedCategoryInput();
 
+    if (selectedCategoryEl && selectedCategoryEl.value != "0") {
+        selectedCategory = selectedCategoryEl.value;
+    }
 
+    const url = selectedCategory === null ? "/todos/clear-done" : `/todos/clear-done?categoryId=${selectedCategory}`;
+    console.log(url)
+
+    const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+
+    resetCategoryFilter();
+    loadTodos();
+}
 
 loadTodos();
 loadCategories();
