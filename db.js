@@ -1,4 +1,3 @@
-//the model used for Categories
 let categories = [
     {
         categoryID: 1,
