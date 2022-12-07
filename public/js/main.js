@@ -84,3 +84,17 @@ async function loadTodos(category) {
     });
     renderUncompletedTodoCount();
 }
+
+//delete todos 
+async function deleteTodo(event) {
+    const todoId = event.target.dataset.todoid;
+    await fetch(`/todos/delete/${todoId}`, {
+        method: "DELETE",
+    })
+    const categoryAllRadio = document.getElementById('filter-all');
+
+    if (categoryAllRadio) {
+        categoryAllRadio.checked = true;
+    }
+    loadTodos();
+}
