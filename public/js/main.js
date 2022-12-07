@@ -195,3 +195,12 @@ async function createCategory(categoryName) {
     loadCategories();
 }
 
+//delete a category function
+async function deleteCategory(event) {
+    const categoryId = event.target.dataset.categoryid;
+
+    await fetch(`/categories/delete/${categoryId}`, {
+        method: "DELETE",
+    });
+    loadCategories();
+}
