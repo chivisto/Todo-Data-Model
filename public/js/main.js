@@ -227,3 +227,26 @@ async function completeTodo(event) {
     }
     loadTodos();
 }
+
+//mark the todo as uncomplete when clock on button
+async function uncompleteTodo(event) {
+    const selectedCategoryEl = getSelectedCategoryInput();
+    const todoId = event.target.dataset.todoid;
+    await fetch(`/todos/update/${todoId}`, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            done: false
+        })
+    });
+    console.log(selectedCategoryEl)
+    if (selectedCategoryEl && selectedCategoryEl.value != "0") {
+        loadTodos(selectedCategoryEl.value);
+        return;
+    }
+    loadTodos();
+}
+
