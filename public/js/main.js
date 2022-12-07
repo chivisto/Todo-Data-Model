@@ -1,3 +1,4 @@
+//final assignment before the final
 const uncompletedTodosListEl = document.getElementById("uncompleted-todos-list");
 
 const completedTodosListEl = document.getElementById("completed-todos-list");
@@ -45,3 +46,41 @@ createTodoBtn.onclick = async function () {
     todoNameInputEl.value = "";
 }
 
+
+//load the todos and mark complete or not or delete them
+async function loadTodos(category) {
+    completedTodosListEl.innerHTML = "";
+    uncompletedTodosListEl.innerHTML = "";
+    categorySelectEl.value = "0";
+    const url = category ? `/todos?category=${category}` : "/todos";
+    const response = await fetch(url)
+    todos = await response.json();
+
+    todos.forEach((todo) => {
+        let todoElement;
+        if (todo.done === false) {
+            todoElement = `
+                <li class="uncompleted">
+                    <p class="margin-style-todo">${todo.todoName}</p>
+                    <div class='actions'>
+                        <i onclick='deleteTodo(event)' data-todoid=${todo.todoID} class="fa fa-trash"></i>
+                        <a onclick='completeTodo(event)' data-todoid=${todo.todoID} class="complete-button">Complete</a>
+                    </div>
+                </li>
+            `;
+            uncompletedTodosListEl.insertAdjacentHTML("beforeend", todoElement);
+        } else {
+            todoElement = `
+                <li class="completed">
+                    <p class="complete-decoration margin-style-todo">${todo.todoName}</p>
+                    <div class='actions'>
+                        <i onclick='deleteTodo(event)' data-todoid=${todo.todoID} class="fa fa-trash"></i>
+                        <a onclick='uncompleteTodo(event)' data-todoid=${todo.todoID} class="uncomplete-button">Mark Incomplete</a>
+                    </div>
+                </li>
+            `;
+            completedTodosListEl.insertAdjacentHTML("beforeend", todoElement);
+        }
+    });
+    renderUncompletedTodoCount();
+}
