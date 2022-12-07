@@ -258,6 +258,16 @@ const resetCategoryFilter = () => {
     }
 }
 
+//select the correct category when clicked on
+const getSelectedCategoryInput = () => {
+    const selectedCategoryEls = document.querySelectorAll("input[type='radio'][name='selectedCategory']")
+    for (const entry of selectedCategoryEls) {
+        if (entry.checked) {
+            return entry;
+        }
+    }
+    return null;
+}
 
 loadTodos();
 loadCategories();
