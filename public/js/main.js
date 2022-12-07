@@ -204,3 +204,26 @@ async function deleteCategory(event) {
     });
     loadCategories();
 }
+
+//mark the todo as complete when click on button
+async function completeTodo(event) {
+    const selectedCategoryEl = getSelectedCategoryInput();
+    const todoId = event.target.dataset.todoid;
+    console.log(selectedCategoryEl)
+    await fetch(`/todos/update/${todoId}`, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            done: true
+        })
+    })
+
+    if (selectedCategoryEl && selectedCategoryEl.value != "0") {
+        loadTodos(selectedCategoryEl.value);
+        return;
+    }
+    loadTodos();
+}
