@@ -22,8 +22,10 @@ const clearDoneBtn = document.querySelector(".clearTodo");
 
 
 let todos = [];
+
 let categories = [];
 
+//create category
 categoryCreateForm.onsubmit = async function (e) {
     e.preventDefault();
     let categoryName = categoryNameInput.value;
@@ -31,19 +33,24 @@ categoryCreateForm.onsubmit = async function (e) {
     categoryCreateForm.reset();
 }
 
+//clear button 
 clearDoneBtn.onclick = clearDone;
 
+//button for the todos
 createTodoBtn.onclick = async function () {
     const todoName = todoNameInputEl.value;
+
     if (todoName.trim() === "") {
         return;
     }
+
     const categoryID = categorySelectEl.value;
     await createTodo(todoName, +categoryID);
     loadTodos();
     todoNameInputEl.value = "";
 }
 
+//load the todos that are already there
 async function loadTodos(category) {
     completedTodosListEl.innerHTML = "";
     uncompletedTodosListEl.innerHTML = "";
@@ -81,19 +88,24 @@ async function loadTodos(category) {
     renderUncompletedTodoCount();
 }
 
+//delete todos function
 async function deleteTodo(event) {
     const todoId = event.target.dataset.todoid;
+
     await fetch(`/todos/delete/${todoId}`, {
         method: "DELETE",
     })
+
     const categoryAllRadio = document.getElementById('filter-all');
 
     if (categoryAllRadio) {
         categoryAllRadio.checked = true;
     }
+
     loadTodos();
 }
 
+//create user todo and add to category
 async function createTodo(todoName, categoryID) {
     await fetch("/todos/create", {
         method: "POST",
@@ -103,13 +115,17 @@ async function createTodo(todoName, categoryID) {
         },
         body: JSON.stringify({ todoName, categoryID })
     });
+
     resetCategoryFilter();
 }
 
+//load the categories that are already in model
 async function loadCategories() {
     categoriesListEl.innerHTML = "";
+
     const response = await fetch("/categories")
     categories = await response.json();
+
     categories.forEach((category) => {
         let categoryElement = `
             <li>
@@ -127,11 +143,13 @@ async function loadCategories() {
         `;
         categoriesListEl.insertAdjacentHTML("beforeend", categoryElement);
     });
+
     renderCategoryFilters(categories);
     renderCategorySelect(categories);
 }
 
-function renderCategoryFilters(categories) {
+//display the filters to html
+const renderCategoryFilters = (categories) => {
     categoryFilterEl.innerHTML = "";
     categoryFilterEl.insertAdjacentHTML("beforeend", `
     <div class="categoryFilterContainer">
@@ -161,8 +179,10 @@ function renderCategoryFilters(categories) {
     });
 }
 
-function renderCategorySelect(categories) {
+//display the category when selected depending on what is clicked
+const renderCategorySelect = (categories) => {
     categorySelectEl.innerHTML = "";
+
     categories.forEach(category => {
         let categoryElement =
             `<option value="${category.categoryID}" data-categoryID='${category.categoryID} '>${category.categoryName} </option>`;
@@ -170,6 +190,7 @@ function renderCategorySelect(categories) {
     })
 }
 
+//create new category for the user
 async function createCategory(categoryName) {
     const response = await fetch("/categories/create", {
         method: "POST",
@@ -181,10 +202,12 @@ async function createCategory(categoryName) {
             categoryName
         })
     })
+
     await response.json();
     loadCategories();
 }
 
+//delete the category on click
 async function deleteCategory(event) {
     const categoryId = event.target.dataset.categoryid;
 
@@ -194,6 +217,7 @@ async function deleteCategory(event) {
     loadCategories();
 }
 
+//let the user edit the category
 async function editCategory(event) {
     const categoryId = event.target.dataset.categoryid;
     const categoryName = document.getElementById(`category-${categoryId}`).value;
@@ -201,6 +225,7 @@ async function editCategory(event) {
     if (categoryName.trim() === "") {
         return;
     }
+
     await fetch(`/categories/update/${categoryId}`, {
         method: "PUT",
         headers: {
@@ -211,13 +236,16 @@ async function editCategory(event) {
             categoryName
         }),
     });
+
     loadCategories();
 }
 
+//be able to mark the todo as complete
 async function completeTodo(event) {
     const selectedCategoryEl = getSelectedCategoryInput();
     const todoId = event.target.dataset.todoid;
     console.log(selectedCategoryEl)
+
     await fetch(`/todos/update/${todoId}`, {
         method: "PUT",
         headers: {
@@ -233,9 +261,11 @@ async function completeTodo(event) {
         loadTodos(selectedCategoryEl.value);
         return;
     }
+
     loadTodos();
 }
 
+//mark the todo as incomplete 
 async function uncompleteTodo(event) {
     const selectedCategoryEl = getSelectedCategoryInput();
     const todoId = event.target.dataset.todoid;
@@ -257,41 +287,52 @@ async function uncompleteTodo(event) {
     loadTodos();
 }
 
-function resetCategoryFilter() {
+//let the filters reset when clicked all 
+const resetCategoryFilter = () => {
     const categoryAllRadio = document.getElementById('filter-all');
+
     if (categoryAllRadio) {
         categoryAllRadio.checked = true;
     }
 }
 
-function getSelectedCategoryInput() {
+//let the category display depending on the filter selected
+const getSelectedCategoryInput = () => {
     const selectedCategoryEls = document.querySelectorAll("input[type='radio'][name='selectedCategory']")
+    
     for (const entry of selectedCategoryEls) {
         if (entry.checked) {
             return entry;
         }
     }
+
     return null;
 }
 
+//show how many todos are left
 const renderUncompletedTodoCount = () => {
     const uncompletedTodos = todos.filter(todo => todo.done === false);
     pendingEl.innerHTML = uncompletedTodos.length;
 }
 
+//be able to change the category
 const handleCategoryFilterChange = (event) => {
     const categoryId = +event.target.dataset.categoryid;
     loadTodos(categoryId);
 }
 
+//be able to clear everything when its done
 async function clearDone() {
     let selectedCategory = null;
     const selectedCategoryEl = getSelectedCategoryInput();
+
     if (selectedCategoryEl && selectedCategoryEl.value != "0") {
         selectedCategory = selectedCategoryEl.value;
     }
+
     const url = selectedCategory === null ? "/todos/clear-done" : `/todos/clear-done?categoryId=${selectedCategory}`;
     console.log(url)
+
     const response = await fetch(url, {
         method: "DELETE",
         headers: {
@@ -299,9 +340,11 @@ async function clearDone() {
             'Content-Type': 'application/json'
         }
     })
+
     resetCategoryFilter();
     loadTodos();
 }
 
+//call functions that are needed
 loadTodos();
 loadCategories();
