@@ -14,6 +14,8 @@ Run in production mode
 
 npm start
 
+http://localhost:8000
+
 ## TODOS API
 
 ### GET Todos
