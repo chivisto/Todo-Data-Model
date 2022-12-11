@@ -15,11 +15,10 @@ const getTodos = async (req, res) => {
 }
 
 const postTodo = async (req, res) => {
-    const { todoName, categoryID, categoryName } = req.body;
+    const { todoName, categoryID } = req.body;
     let todo = new Todo({
         todoName,
         category: categoryID,
-        categoryName: categoryName,
         done: false
     });
     todo = await todo.save();
