@@ -2,17 +2,20 @@
 Isaac Covarrubias
 
 ## Project Setup
+*   Create a .env file in the project's root folder
+*   Added ```DB_URL=mongodb_connection_string_here```
+
 Install dependencies
 
-npm install
+```npm install```
 
 Run in development mode(using nodemon)
 
-npm run dev
+```npm run dev```
 
 Run in production mode
 
-npm start
+```npm start```
 
 http://localhost:8000
 
