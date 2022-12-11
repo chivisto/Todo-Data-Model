@@ -40,6 +40,7 @@ const deleteCategory = async (req, res) => {
     return res.status(200).json("deleted");
 }
 
+
 module.exports = {
     getCategories,
     postCategory,
