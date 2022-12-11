@@ -1,81 +1,66 @@
-let { todos, currentTodoId } = require("../db")
+// let { todos, currentTodoId } = require("../db")
+const Todo = require("../models/todo");
+const { formatMongooseResponse } = require("../utils");
 
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
-const getTodos = (req, res) => {
+const getTodos = async (req, res) => {
     const { category } = req.query;
-    if (category) {
-        let data = todos.filter((cat) => cat.categoryID === +category);
-        return res.json(data);
+    if(category) {
+        const todos = await Todo.find({
+            category
+        });
+        return res.json(formatMongooseResponse(todos));
     }
-    return res.json(todos);
+    const todos = await Todo.find({});
+    return res.json(formatMongooseResponse(todos));
 }
 
-
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
-const postTodo = (req, res) => {
-    const { todoName, categoryID } = req.body;
-    currentTodoId++;
-    const newTodo = {
-        todoID: +currentTodoId,
+const postTodo = async (req, res) => {
+    const { todoName, categoryID, categoryName } = req.body;
+    let todo = new Todo({
         todoName,
-        done: false,
-        hide: false,
-        categoryID
-    }
-    todos.push(newTodo);
-    return res.status(201).json(newTodo);
+        category: categoryID,
+        categoryName: categoryName,
+        done: false
+    });
+    todo = await todo.save();
+    return res.status(201).json(formatMongooseResponse(todo));
 }
 
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
-const putTodo = (req, res) => {
+const putTodo = async (req, res) => {
     const { todoId } = req.params;
     const newData = req.body;
-    const selectedTodoIndex = todos.findIndex((todo) => todo.todoID === +todoId);
-    todos.splice(selectedTodoIndex, 1, {
-        ...todos[selectedTodoIndex],
-        ...newData
+    await Todo.updateOne({
+        _id: todoId
+    }, {
+        $set: {
+            ...newData
+        }
     });
-
-    return res.status(200).json(todos[selectedTodoIndex]);
+    const todo = await Todo.findById(todoId);
+    return res.status(200).json(formatMongooseResponse(todo));
 
 }
 
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
-const deleteTodo = (req, res) => {
+const deleteTodo = async (req, res) => {
     const { todoId } = req.params;
-    const selectedTodoIndex = todos.findIndex((todo) => todo.todoID === +todoId);
-    todos.splice(selectedTodoIndex, 1);
+    await Todo.deleteOne({
+        _id: todoId
+    });
     return res.status(200).json("deleted");
 }
 
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
-const getTodosByCategory = (req, res) => {
+const getTodosByCategory = async (req, res) => {
     const { categoryId } = req.params;
-    const filteredTodos = todos.filter(todo => todo.categoryID === +categoryId);
-    return res.status(200).json(filteredTodos);
+    const todos = await Todo.find({
+        category: categoryId
+    });
+    return res.status(200).json(formatMongooseResponse(todos));
 }
 
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
-const clearDone = (req, res) => {
-    todos = todos.filter(todo => todo.done === false);
+const clearDone = async (req, res) => {
+    await Todo.deleteMany({
+        done: true
+    });
     return res.status(200).json("Cleared");
 }
 
