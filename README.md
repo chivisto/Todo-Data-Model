@@ -3,7 +3,7 @@ Isaac Covarrubias
 
 ## Project Setup
 *   Create a .env file in the project's root folder
-*   Added ```DB_URL=mongodb_connection_string_here```
+*   Add this variable to the .env file ```DB_URL = "mongodb_connection_string_here" ```
 
 Install dependencies
 
