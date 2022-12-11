@@ -1,54 +1,44 @@
-let { categories, currentCategoryId } = require("../db");
+const Category = require("../models/category");
+const { formatMongooseResponse } = require("../utils");
 
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
-const getCategories = (req, res) => {
-    res.status(200).json(categories);
+const getCategories = async (req, res) => {
+    const categories = await Category.find({});
+    res.status(200).json(formatMongooseResponse(categories));
 }
 
-
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
-const postCategory = (req, res) => {
+const postCategory = async (req, res) => {
     const { categoryName } = req.body;
-    currentCategoryId++;
-    const newCategory = { categoryID: currentCategoryId, categoryName };
-    categories.push(newCategory);
-    res.status(200).json(newCategory);
+    let category = new Category({
+        categoryName
+    });
+    category = await category.save();
+    res.status(200).json({
+        _id: category._id,
+        categoryName: category.categoryName,
+    });
 }
 
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
-const putCategory = (req, res) => {
+const putCategory = async (req, res) => {
     const { categoryId } = req.params;
     const newData = req.body;
-
-    const selectedCategoryIndex = categories.findIndex((category) => category.categoryID === +categoryId); 
-    categories.splice(selectedCategoryIndex, 1, {
-        ...categories[selectedCategoryIndex],
-        ...newData
+    await Category.updateOne({
+        _id: categoryId
+    }, {
+        $set: {
+            ...newData
+        }
     });
-    return res.status(200).json(categories[selectedCategoryIndex]);
+    const category = await Category.findById(categoryId);
+    res.status(200).json(formatMongooseResponse(category));
 }
 
-
-/**
- * @param {Request} req 
- * @param {Response} res 
- */
-const deleteCategory = (req, res) => {
+const deleteCategory = async (req, res) => {
     const { categoryId } = req.params;
-    const selectedCategoryIndex = categories.findIndex((category) => category.categoryID === +categoryId); 
-    categories.splice(selectedCategoryIndex, 1);
+    await Category.deleteOne({
+        _id: categoryId
+    });
     return res.status(200).json("deleted");
 }
-
 
 module.exports = {
     getCategories,
