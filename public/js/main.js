@@ -45,7 +45,7 @@ createTodoBtn.onclick = async function () {
     }
 
     const categoryID = categorySelectEl.value;
-    await createTodo(todoName, +categoryID);
+    await createTodo(todoName, categoryID);
     loadTodos();
     todoNameInputEl.value = "";
 }
@@ -66,8 +66,8 @@ async function loadTodos(category) {
                 <li class="uncompleted">
                     <p class="margin-style-todo">${todo.todoName}</p>
                     <div class='actions'>
-                        <i onclick='deleteTodo(event)' data-todoid=${todo.todoID} class="fa fa-trash"></i>
-                        <a onclick='completeTodo(event)' data-todoid=${todo.todoID} class="complete-button">Complete</a>
+                        <i onclick='deleteTodo(event)' data-todoid=${todo._id} class="fa fa-trash"></i>
+                        <a onclick='completeTodo(event)' data-todoid=${todo._id} class="complete-button">Complete</a>
                     </div>
                 </li>
             `;
@@ -77,8 +77,8 @@ async function loadTodos(category) {
                 <li class="completed">
                     <p class="complete-decoration margin-style-todo">${todo.todoName}</p>
                     <div class='actions'>
-                        <i onclick='deleteTodo(event)' data-todoid=${todo.todoID} class="fa fa-trash"></i>
-                        <a onclick='uncompleteTodo(event)' data-todoid=${todo.todoID} class="uncomplete-button">Mark Incomplete</a>
+                        <i onclick='deleteTodo(event)' data-todoid=${todo._id} class="fa fa-trash"></i>
+                        <a onclick='uncompleteTodo(event)' data-todoid=${todo._id} class="uncomplete-button">Mark Incomplete</a>
                     </div>
                 </li>
             `;
@@ -133,11 +133,11 @@ async function loadCategories() {
                 <input class="edit-input"
                     type="text"
                     placeholder="Type to Edit"
-                    id='category-${category.categoryID}'
+                    id='category-${category._id}'
                     />
                     <div class='actions'>
-                        <i onclick='editCategory(event)' data-categoryid=${category.categoryID} class="fa fa-edit"></i>
-                        <i onclick='deleteCategory(event)' data-categoryid=${category.categoryID} class="fa fa-trash"></i>
+                        <i onclick='editCategory(event)' data-categoryid=${category._id} class="fa fa-edit"></i>
+                        <i onclick='deleteCategory(event)' data-categoryid=${category._id} class="fa fa-trash"></i>
                     </div>
             </li>
         `;
@@ -167,12 +167,12 @@ const renderCategoryFilters = (categories) => {
         <div class="categoryFilterContainer">
             <input 
                 onchange='handleCategoryFilterChange(event)'
-                data-categoryID='${category.categoryID}'
-                id='filter-${category.categoryID}' 
+                data-categoryID='${category._id}'
+                id='filter-${category._id}' 
                 name="selectedCategory" 
                 type="radio"
-                value="${category.categoryID}"/>
-            <label for='filter-${category.categoryID}'>${category.categoryName}</label>
+                value="${category._id}"/>
+            <label for='filter-${category._id}'>${category.categoryName}</label>
         </div>
         `;
         categoryFilterEl.insertAdjacentHTML("beforeend", categoryElement);
@@ -185,7 +185,7 @@ const renderCategorySelect = (categories) => {
 
     categories.forEach(category => {
         let categoryElement =
-            `<option value="${category.categoryID}" data-categoryID='${category.categoryID} '>${category.categoryName} </option>`;
+            `<option value="${category._id}" data-categoryID='${category._id} '>${category.categoryName} </option>`;
         categorySelectEl.insertAdjacentHTML('beforeend', categoryElement);
     })
 }
@@ -244,7 +244,6 @@ async function editCategory(event) {
 async function completeTodo(event) {
     const selectedCategoryEl = getSelectedCategoryInput();
     const todoId = event.target.dataset.todoid;
-    console.log(selectedCategoryEl)
 
     await fetch(`/todos/update/${todoId}`, {
         method: "PUT",
@@ -279,7 +278,6 @@ async function uncompleteTodo(event) {
             done: false
         })
     });
-    console.log(selectedCategoryEl)
     if (selectedCategoryEl && selectedCategoryEl.value != "0") {
         loadTodos(selectedCategoryEl.value);
         return;
@@ -299,7 +297,7 @@ const resetCategoryFilter = () => {
 //let the category display depending on the filter selected
 const getSelectedCategoryInput = () => {
     const selectedCategoryEls = document.querySelectorAll("input[type='radio'][name='selectedCategory']")
-    
+
     for (const entry of selectedCategoryEls) {
         if (entry.checked) {
             return entry;
@@ -317,7 +315,7 @@ const renderUncompletedTodoCount = () => {
 
 //be able to change the category
 const handleCategoryFilterChange = (event) => {
-    const categoryId = +event.target.dataset.categoryid;
+    const categoryId = event.target.dataset.categoryid;
     loadTodos(categoryId);
 }
 
@@ -331,9 +329,8 @@ async function clearDone() {
     }
 
     const url = selectedCategory === null ? "/todos/clear-done" : `/todos/clear-done?categoryId=${selectedCategory}`;
-    console.log(url)
 
-    const response = await fetch(url, {
+    await fetch(url, {
         method: "DELETE",
         headers: {
             'Accept': 'application/json',
