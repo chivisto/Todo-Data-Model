@@ -1,11 +1,20 @@
 const Category = require("../models/category");
 const { formatMongooseResponse } = require("../utils");
 
+/**
+ * @param {Request} req 
+ * @param {Response} res 
+ */
 const getCategories = async (req, res) => {
     const categories = await Category.find({});
     res.status(200).json(formatMongooseResponse(categories));
 }
 
+
+/**
+ * @param {Request} req 
+ * @param {Response} res 
+ */
 const postCategory = async (req, res) => {
     const { categoryName } = req.body;
     let category = new Category({
@@ -18,6 +27,10 @@ const postCategory = async (req, res) => {
     });
 }
 
+/**
+ * @param {Request} req 
+ * @param {Response} res 
+ */
 const putCategory = async (req, res) => {
     const { categoryId } = req.params;
     const newData = req.body;
@@ -32,6 +45,11 @@ const putCategory = async (req, res) => {
     res.status(200).json(formatMongooseResponse(category));
 }
 
+
+/**
+ * @param {Request} req 
+ * @param {Response} res 
+ */
 const deleteCategory = async (req, res) => {
     const { categoryId } = req.params;
     await Category.deleteOne({

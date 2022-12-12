@@ -1,7 +1,10 @@
 // let { todos, currentTodoId } = require("../db")
 const Todo = require("../models/todo");
 const { formatMongooseResponse } = require("../utils");
-
+/**
+ * @param {Request} req 
+ * @param {Response} res 
+ */
 const getTodos = async (req, res) => {
     const { category } = req.query;
     if(category) {
@@ -14,6 +17,10 @@ const getTodos = async (req, res) => {
     return res.json(formatMongooseResponse(todos));
 }
 
+/**
+ * @param {Request} req 
+ * @param {Response} res 
+ */
 const postTodo = async (req, res) => {
     const { todoName, categoryID } = req.body;
     let todo = new Todo({
@@ -25,6 +32,10 @@ const postTodo = async (req, res) => {
     return res.status(201).json(formatMongooseResponse(todo));
 }
 
+/**
+ * @param {Request} req 
+ * @param {Response} res 
+ */
 const putTodo = async (req, res) => {
     const { todoId } = req.params;
     const newData = req.body;
@@ -40,6 +51,10 @@ const putTodo = async (req, res) => {
 
 }
 
+/**
+ * @param {Request} req 
+ * @param {Response} res 
+ */
 const deleteTodo = async (req, res) => {
     const { todoId } = req.params;
     await Todo.deleteOne({
@@ -48,6 +63,10 @@ const deleteTodo = async (req, res) => {
     return res.status(200).json("deleted");
 }
 
+/**
+ * @param {Request} req 
+ * @param {Response} res 
+ */
 const getTodosByCategory = async (req, res) => {
     const { categoryId } = req.params;
     const todos = await Todo.find({
@@ -56,6 +75,10 @@ const getTodosByCategory = async (req, res) => {
     return res.status(200).json(formatMongooseResponse(todos));
 }
 
+/**
+ * @param {Request} req 
+ * @param {Response} res 
+ */
 const clearDone = async (req, res) => {
     await Todo.deleteMany({
         done: true
